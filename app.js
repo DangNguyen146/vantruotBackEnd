@@ -6,7 +6,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const config = require("./DB.js");
-const todosRoute = require("./todos.route");
+const groupRouter = require("./routers/group");
+const userRouter = require("./routers/user");
+
 const port = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
@@ -23,7 +25,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/todos", todosRoute);
+app.use(groupRouter);
+app.use(userRouter);
 
 app.listen(port, () => {
   console.log("Started at 4000");
