@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true,
     },
     matKhau: {
       type: String,
@@ -18,14 +17,12 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       lowercase: true,
     },
     soDt: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     hoTen: {
@@ -93,6 +90,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 
 module.exports = User;

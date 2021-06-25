@@ -1,9 +1,4 @@
 const User = require("../models/user");
-// const nodeMailer = require("nodemailer");
-// const sendEmail = require("../utils/email/sendEmail");
-// const jwt = require("jsonwebtoken");
-// const crypto = require("crypto");
-// const bcrypt = require("bcryptjs");
 
 class userController {
   async createUser(req, res) {
@@ -11,9 +6,9 @@ class userController {
     try {
       await user.save();
       const token = await user.generateAuthToken();
-      res.status(200).json({ message: "Success", token });
+      res.status(200).json({ message: "Success", user });
     } catch (e) {
-      res.status(400).send(e);
+      res.status(200).json({ error: "Tài khoản đã tồn tại!" });
     }
   }
   //login
@@ -23,11 +18,14 @@ class userController {
         req.body.taiKhoan,
         req.body.matKhau
       );
-      const token = await user.generateAuthToken();
-      res.status(200).json({ message: "Logged in!", token });
+      // const token = await user.generateAuthToken();
+      res.status(200).json({ message: "Logged in!", user });
     } catch (e) {
-      res.status(400).json({ error: "Cant login!" });
+      res.status(200).json({ error: "Cant login!" });
     }
+  }
+  async getProfile(req, res) {
+    res.send(req.user);
   }
 }
 
