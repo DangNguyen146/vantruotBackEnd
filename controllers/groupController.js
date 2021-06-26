@@ -48,6 +48,18 @@ class groupController {
       res.json(item);
     });
   }
+  async itemContent(req, res) {
+    let id = req.params.id;
+    Trucks.findById(id, function (err, item) {
+      if (item) res.json(item);
+    });
+    Decks.findById(id, function (err, item) {
+      if (item) res.json(item);
+    });
+    Wheels.findById(id, function (err, item) {
+      if (item) res.json(item);
+    });
+  }
 }
 
 module.exports = new groupController();
