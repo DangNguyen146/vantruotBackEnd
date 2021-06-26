@@ -21,7 +21,7 @@ class userController {
       // const token = await user.generateAuthToken();
       res.status(200).json({ message: "Logged in!", user });
     } catch (e) {
-      res.status(200).json({ error: "Cant login!" });
+      res.status(500).json("Sai tên đăng nhập/mật khẩu");
     }
   }
   async getProfile(req, res) {
